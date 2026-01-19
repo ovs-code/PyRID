@@ -180,7 +180,7 @@ def I():
 @nb.njit
 def P(rij):
     
-    """Calculates the normalized tensor/outer product :math:`\\frac{\\boldsymbol{r}_{ij} \otimes \\boldsymbol{r}_{ij}}{r_{ij}}` for the hydrodynamic interaction tensor (Oseen tensor).
+    """Calculates the normalized tensor/outer product :math:`\\frac{\\boldsymbol{r}_{ij} \\otimes \\boldsymbol{r}_{ij}}{r_{ij}}` for the hydrodynamic interaction tensor (Oseen tensor).
     
     Parameters
     ----------
@@ -215,11 +215,11 @@ def levi_civita(rij):
     Notes
     -----
     
-    Given the distance vector :math:`r_{ij} = [x_{ij},y_{ij},z_{ij}]` the product :math:`\epsilon \cdot r_{ij}` is returned, where :math:`\epsilon` is the Levi-Civita tensor:
+    Given the distance vector :math:`r_{ij} = [x_{ij},y_{ij},z_{ij}]` the product :math:`\\epsilon \\cdot r_{ij}` is returned, where :math:`\\epsilon` is the Levi-Civita tensor:
     
     .. math::
         
-        \epsilon \cdot r_{ij} = 
+        \\epsilon \\cdot r_{ij} = 
         \\begin{pmatrix}
         0 & z_{ij} & -y_{ij}\\\\
         -z_{ij} & 0 & x_{ij}\\\\
@@ -259,31 +259,31 @@ def calc_mu(pos,radii, eta_0):
         
     .. math::
         
-        v(r) = T(r-r_p) \cdot F
+        v(r) = T(r-r_p) \\cdot F
         
     T is called the hyrodynamic interaction tensor, Oseen tensor or Green's function of the Stoke's equations. The above solution is also called Stokeslet:
         
     .. math::
         
-        \\boldsymbol{T}(r) = \\frac{1}{8 \\pi \\eta r} \cdot \\Big(\\boldsymbol{I}+\\frac{\\boldsymbol{r} \otimes \\boldsymbol{r}}{r^2} \\Big),
+        \\boldsymbol{T}(r) = \\frac{1}{8 \\pi \\eta r} \\cdot \\Big(\\boldsymbol{I}+\\frac{\\boldsymbol{r} \\otimes \\boldsymbol{r}}{r^2} \\Big),
         
-    where :math:`\\eta` is the viscosity and :math:`\otimes` is the outer product. In prosa, :math:`T` gives the fluid flow velocty at some point :math:`r`, given a force acting at another point :math:`r_p`.
-    Kirkwood and Riseman calculated the translational mobility tensor of a rigid bead molecule using the Oseen tensor to describe the hydrodynamic interaction between the beads, and by assigning each bead its friction coefficient :math:`\\zeta_i = 6 \pi \\eta_0 a_i`:
+    where :math:`\\eta` is the viscosity and :math:`\\otimes` is the outer product. In prosa, :math:`T` gives the fluid flow velocty at some point :math:`r`, given a force acting at another point :math:`r_p`.
+    Kirkwood and Riseman calculated the translational mobility tensor of a rigid bead molecule using the Oseen tensor to describe the hydrodynamic interaction between the beads, and by assigning each bead its friction coefficient :math:`\\zeta_i = 6 \\pi \\eta_0 a_i`:
         
     .. math::
         
         \\begin{align*}
         \\mu_{ij}^{tt} = & \\delta_{ij}(6 \\pi \\eta_0 a_i)^{-1} \\boldsymbol{I} \\\\
         & + (1-\\delta_ij)(8 \\pi \\eta_0 r_{ij})^{-1} \\\\
-        & \\Big(\\boldsymbol{I}+\\frac{\\boldsymbol{r} \otimes \\boldsymbol{r}}{r^2} \\Big)
+        & \\Big(\\boldsymbol{I}+\\frac{\\boldsymbol{r} \\otimes \\boldsymbol{r}}{r^2} \\Big)
         \\end{align*}
     
-    This solution is fairly intuitive. The first term is just the mobility of a single particle with radius :math:`a_i`. The second term is just the Oseen tensor. Recalling that the mobility :math:`\mu` is defined as the ratio of a particles drift velocity and the applied applied force, the interpretation of the Oseen tensor as representing the interaction part of the bead mobility matrix feels natural (recalling its origin (see above)). However, we also instantly see that something is missing since the Oseen tensor  only considers the distance between the bead centers but neglects their volume/radius :math:`a_i`. Fortunately,  :cite:t:`Torre1977` established a correction to the Oseen tensor for nonidentical spheres (also see :cite:`Torre2007`):
+    This solution is fairly intuitive. The first term is just the mobility of a single particle with radius :math:`a_i`. The second term is just the Oseen tensor. Recalling that the mobility :math:`\\mu` is defined as the ratio of a particles drift velocity and the applied applied force, the interpretation of the Oseen tensor as representing the interaction part of the bead mobility matrix feels natural (recalling its origin (see above)). However, we also instantly see that something is missing since the Oseen tensor  only considers the distance between the bead centers but neglects their volume/radius :math:`a_i`. Fortunately,  :cite:t:`Torre1977` established a correction to the Oseen tensor for nonidentical spheres (also see :cite:`Torre2007`):
         
     .. math::
         :label: modified_Oseen
         
-        \\boldsymbol{T}_{ij} = \\frac{1}{8 \\pi \\eta r} \cdot \\Big(\\boldsymbol{I}+\\frac{\\boldsymbol{r}_{ij} \otimes \\boldsymbol{r}_{ij}}{r_{ij}^2} + \\frac{\\sigma_i + \\sigma_j}{r_{ij}^2} \\Big( \\frac{1}{3} \\boldsymbol{I} - \\frac{\\boldsymbol{r}_{ij} \otimes \\boldsymbol{r}_{ij}}{r_{ij}^2} \\Big) \\Big),
+        \\boldsymbol{T}_{ij} = \\frac{1}{8 \\pi \\eta r} \\cdot \\Big(\\boldsymbol{I}+\\frac{\\boldsymbol{r}_{ij} \\otimes \\boldsymbol{r}_{ij}}{r_{ij}^2} + \\frac{\\sigma_i + \\sigma_j}{r_{ij}^2} \\Big( \\frac{1}{3} \\boldsymbol{I} - \\frac{\\boldsymbol{r}_{ij} \\otimes \\boldsymbol{r}_{ij}}{r_{ij}^2} \\Big) \\Big),
     
     By that, the friction tensor reads:
     
@@ -291,29 +291,29 @@ def calc_mu(pos,radii, eta_0):
         :label: mu_tt
         
         \\begin{align*}
-        \mu^{tt}_{ij} = & \\delta_{ij} (6 \\pi \eta_0 a_i)^{-1} \\boldsymbol{I} + (1-\\delta_{ij})(8 \\pi \\eta_0 r_{ij}^{-1})(\\boldsymbol{I}+\\boldsymbol{P}_{ij}) \\\\
+        \\mu^{tt}_{ij} = & \\delta_{ij} (6 \\pi \\eta_0 a_i)^{-1} \\boldsymbol{I} + (1-\\delta_{ij})(8 \\pi \\eta_0 r_{ij}^{-1})(\\boldsymbol{I}+\\boldsymbol{P}_{ij}) \\\\
         & + (8 \\pi \\eta_0 r_{ij}^{-3})(a_i^2+a_j^2)(\\boldsymbol{I}-3 \\boldsymbol{P}_{ij}),
         \\end{align*}
     
-    where :math:`\\boldsymbol{P}_{ij} = \\Big(\\boldsymbol{I}+\\frac{\\boldsymbol{r} \otimes \\boldsymbol{r}}{r^2} \\Big)`.
+    where :math:`\\boldsymbol{P}_{ij} = \\Big(\\boldsymbol{I}+\\frac{\\boldsymbol{r} \\otimes \\boldsymbol{r}}{r^2} \\Big)`.
     The mobility tensor for rotation, not correcting for the beads volume, reads :cite:p:`Carrasco1999a`.
     
     .. math::
         :label: mu_rr
         
         \\begin{align*}
-        \mu^{rr}_{ij} = & \\delta_{ij} (8 \\pi \\eta_0 a_i^3)^{-1} \\boldsymbol{I} \\\\
-        & + (1 - \delta_{ij})(16 \\pi \\eta_0 r^3_{ij})^{-1} (3 \\boldsymbol{P}_{ij} - \\boldsymbol{I})
+        \\mu^{rr}_{ij} = & \\delta_{ij} (8 \\pi \\eta_0 a_i^3)^{-1} \\boldsymbol{I} \\\\
+        & + (1 - \\delta_{ij})(16 \\pi \\eta_0 r^3_{ij})^{-1} (3 \\boldsymbol{P}_{ij} - \\boldsymbol{I})
         \\end{align*}    
         
-    Here, again, the first term is just the rotational mobility of the single bead and the second term accounts for the hydrodynamic interaction. In this formulation, there is still a correction for the volume missing. This correction consists of adding :math:`6 \eta_0 V_m \\boldsymbol{I}` to the diagonal components of the rotational friction tensor :math:`\\Xi^{rr}_O`, where :math:`V_m` is the volume of the bead model (sum over all bead volumes) :cite:`Torre1983`, :cite:p:`Carrasco1999a`.
+    Here, again, the first term is just the rotational mobility of the single bead and the second term accounts for the hydrodynamic interaction. In this formulation, there is still a correction for the volume missing. This correction consists of adding :math:`6 \\eta_0 V_m \\boldsymbol{I}` to the diagonal components of the rotational friction tensor :math:`\\Xi^{rr}_O`, where :math:`V_m` is the volume of the bead model (sum over all bead volumes) :cite:`Torre1983`, :cite:p:`Carrasco1999a`.
     
     And, at last, for rotation-translation coupling, we have :cite:p:`Carrasco1999a`:
     
     .. math::
         :label: mu_rt
         
-        \mu^{rt}_{ij} = (1-\\delta_{ij}) (8 \\pi \\eta_0 r_{ij}^2)^{-1} \\boldsymbol{\\epsilon}\\boldsymbol{\\hat{r}}_{ij} 
+        \\mu^{rt}_{ij} = (1-\\delta_{ij}) (8 \\pi \\eta_0 r_{ij}^2)^{-1} \\boldsymbol{\\epsilon}\\boldsymbol{\\hat{r}}_{ij} 
     
     Returns
     -------
@@ -485,7 +485,7 @@ def calc_Xi(zeta_tt, zeta_rt, zeta_tr, zeta_rr, pos,radii):
     and :math:`U = (\\boldsymbol{u}_1, ..., \\boldsymbol{u}_N)^T`, :math:`W = (\\boldsymbol{\\omega}_1, ..., \\boldsymbol{\\omega}_N)^T`. Here :math:`\\zeta` are of dimension (3Nx3N), forming the friction supermatrix of dimension (6N,6N). The inverted friction supermatrix is the mobility supermatrix (for inmversion of supermatrices also see supermatrix_inverse()).
     
     Next, we consider not a system of N free beads but a rigid bead model, i.e. the beads are rigidly connected.
-    Thereby, all beads move together with some translational velocity :math:`u_{O}`. Let the body's frame of reference lie at the center of diffusion of the bead model :math:`\\boldsymbol{r}_O` and let :math:`\\omega` be the angular velocity of the rigid bead model. Then, in addition to the translational velocity of the molecule's center, each bead experiences a translation velocity due to the rotation :math:`\\boldsymbol{\omega} \\times \\boldsymbol{r}_i`, where :math:`\\boldsymbol{r}_i` is the position vector from the moclules origin :math:`\\boldsymbol{r}_O` (in the body frame of reference). Thereby, the total velocity is:
+    Thereby, all beads move together with some translational velocity :math:`u_{O}`. Let the body's frame of reference lie at the center of diffusion of the bead model :math:`\\boldsymbol{r}_O` and let :math:`\\omega` be the angular velocity of the rigid bead model. Then, in addition to the translational velocity of the molecule's center, each bead experiences a translation velocity due to the rotation :math:`\\boldsymbol{\\omega} \\times \\boldsymbol{r}_i`, where :math:`\\boldsymbol{r}_i` is the position vector from the moclules origin :math:`\\boldsymbol{r}_O` (in the body frame of reference). Thereby, the total velocity is:
         
     .. math::
         :label: Velocity
@@ -528,17 +528,17 @@ def calc_Xi(zeta_tt, zeta_rt, zeta_tr, zeta_rr, pos,radii):
         \\boldsymbol{T}_O = \\sum_i^N \\boldsymbol{T}_{P,i} +  \\boldsymbol{r}_i \\times \\boldsymbol{F}_i = \\sum_{i=1}^N \\sum_{j=1}^N \\zeta_{ij}^{rt} \\cdot (\\boldsymbol{u}_O + \\boldsymbol{\\omega} \\times \\boldsymbol{r}_j) + \\zeta_{ij}^{rr} \\cdot \\boldsymbol{\\omega} + \\boldsymbol{r}_i \\times \\Big( \\zeta_{ij}^{tt} (\\boldsymbol{u}_O + \\boldsymbol{\\omega} \\times \\boldsymbol{r}_j) + \\zeta_{ij}^{tr} \\omega \\Big). 
   
         
-    In principle, we are done now, however, we would like to transform this into a more 'general' expression that we can write in a simple matrix form. For this, we use a little trick to get rid of the cross product, by turning :math:`\\omega \\times r` into the dot product :math:`- A \cdot \\omega` (note: the sign changed, because of the anticommutativity of the cross product). After some rearranging, we end up with:
+    In principle, we are done now, however, we would like to transform this into a more 'general' expression that we can write in a simple matrix form. For this, we use a little trick to get rid of the cross product, by turning :math:`\\omega \\times r` into the dot product :math:`- A \\cdot \\omega` (note: the sign changed, because of the anticommutativity of the cross product). After some rearranging, we end up with:
         
     .. math::
         :label: FrictionForce_Total_2
         
-        \\boldsymbol{F} = \\Big( \\sum_{i=1}^N \\sum_{j=1}^N \\zeta_{ij}^{tt} \\Big) \\cdot \\boldsymbol{u}_O + \\Big( \\sum_{i=1}^N \\sum_{j=1}^N - \\zeta_{ij}^{tt} \\cdot \\boldsymbol{A}_j + \\zeta_{ij}^{tr} \\Big) \cdot \\boldsymbol{\\omega}
+        \\boldsymbol{F} = \\Big( \\sum_{i=1}^N \\sum_{j=1}^N \\zeta_{ij}^{tt} \\Big) \\cdot \\boldsymbol{u}_O + \\Big( \\sum_{i=1}^N \\sum_{j=1}^N - \\zeta_{ij}^{tt} \\cdot \\boldsymbol{A}_j + \\zeta_{ij}^{tr} \\Big) \\cdot \\boldsymbol{\\omega}
         
     .. math::
         :label: FrictionTorque_Total_2
         
-        \\boldsymbol{T} = \\Big( \\sum_{i=1}^N \\sum_{j=1}^N \\zeta_{ij}^{rt} + A_i \zeta_{ij}^{tt} \\Big) \\cdot \\boldsymbol{u}_O + \\Big( \\sum_{i=1}^N \\sum_{j=1}^N \\zeta_{ij}^{rt} \\cdot \\boldsymbol{A}_j + \\zeta_{ij}^{rr} - A_i \\zeta_{ij}^{tt} A_j  + A_i \\zeta_{ij}^{tr} \\Big) \\cdot \\boldsymbol{\\omega}.           
+        \\boldsymbol{T} = \\Big( \\sum_{i=1}^N \\sum_{j=1}^N \\zeta_{ij}^{rt} + A_i \\zeta_{ij}^{tt} \\Big) \\cdot \\boldsymbol{u}_O + \\Big( \\sum_{i=1}^N \\sum_{j=1}^N \\zeta_{ij}^{rt} \\cdot \\boldsymbol{A}_j + \\zeta_{ij}^{rr} - A_i \\zeta_{ij}^{tt} A_j  + A_i \\zeta_{ij}^{tr} \\Big) \\cdot \\boldsymbol{\\omega}.           
         
     If we now want write this in matrix form, similar to the free bead example from above:
         
@@ -559,7 +559,7 @@ def calc_Xi(zeta_tt, zeta_rt, zeta_tr, zeta_rr, pos,radii):
         \\boldsymbol{\\omega} \\\\
         \\end{pmatrix},    
     
-    Where we call :math:`\Xi` the friction tensor of the rigid bead molecule :cite:p:`Carrasco1999a` :
+    Where we call :math:`\\Xi` the friction tensor of the rigid bead molecule :cite:p:`Carrasco1999a` :
     
     .. math::
         :label: Xi
@@ -834,7 +834,3 @@ def diffusion_tensor(Simulation, molecule_name, return_CoD = False, return_CoM =
 #%%
 
 # if __name__ == '__main__':
-
-
-
-

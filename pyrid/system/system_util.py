@@ -631,7 +631,7 @@ class MoleculeType(object):
             
             \\rho(t) = k*e^{-k t},
             
-        where :math:`k = \sum_i^n(k_i)`.
+        where :math:`k = \\sum_i^n(k_i)`.
         As such, we can schedule a reaction event by using the upper equation :cite:t:`Stiles2001`, :cite:t:`Erban2007`. 
         For a unimolecular reaction occuring between t+dt we add this reaction to the reaction list 
         evaluated at time t+dt. The reaction is then processed as any other bimolecular reaction that may 
@@ -642,7 +642,7 @@ class MoleculeType(object):
         .. math::
             :label: pi
             
-            p_i = k_i/\sum_n(k_j)
+            p_i = k_i/\\sum_n(k_j)
             
         Based on the latter equation one of the n unimolecular transitions will be picked.
         As for bimolecular reactions, all other reactions that exist for the educt will be deleted.
@@ -1384,7 +1384,7 @@ class System(object):
         
         Notes
         -----
-        fixed_concentration_at_boundary() calculates some properties that are necessary to properly distribute molecules inside the simulation box that hit the simulation box boundary from the outside (Thereby, 'virtual molecules' become `real` molecules in our simualtion). The number of hits per time step a boundary of area A experiences is :math:`N = l_{perp}*A*C`. Where :math:`C` is the concentration in molecules per volume and :math:`l_{perp}` is the average net displacement in one tiem step towards or away from any plane, where :math:`l_{perp} = \sqrt{(4*D*\Delta t/\pi)}` :cite:t:`Stiles2001`.
+        fixed_concentration_at_boundary() calculates some properties that are necessary to properly distribute molecules inside the simulation box that hit the simulation box boundary from the outside (Thereby, 'virtual molecules' become `real` molecules in our simualtion). The number of hits per time step a boundary of area A experiences is :math:`N = l_{perp}*A*C`. Where :math:`C` is the concentration in molecules per volume and :math:`l_{perp}` is the average net displacement in one tiem step towards or away from any plane, where :math:`l_{perp} = \\sqrt{(4*D*\\Delta t/\\pi)}` :cite:t:`Stiles2001`.
         
         """
         
@@ -1911,7 +1911,7 @@ class System(object):
         Notes
         -----
         Uni-particle reactions are evaluated using a variant of the Gillespie stochastic simulation algorithm. Thereby, for a particle type, the time point of the next uni-particle reaction occuring is calculated in advance and executed when the simualtion reaches the respective time point. 
-        For unimolecular reactions we can draw the time point of the next reaction from a distribution using a variant of the Gillespie Stochastic Simulation Algorithm (SSA) :cite:t:`Stiles2001`, :cite:t:`Erban2007`. For a single molecule having :math:`n` possible transition reactions/reaction paths each having a reaction rate :math:`k_i`, let :math:`k_t = \sum_i^n k_i` be the total reaction rate. 
+        For unimolecular reactions we can draw the time point of the next reaction from a distribution using a variant of the Gillespie Stochastic Simulation Algorithm (SSA) :cite:t:`Stiles2001`, :cite:t:`Erban2007`. For a single molecule having :math:`n` possible transition reactions/reaction paths each having a reaction rate :math:`k_i`, let :math:`k_t = \\sum_i^n k_i` be the total reaction rate. 
         
         Now, let :math:`\\rho(\\tau) d\\tau` be the probability that the next reaction occurs within :math:`[t+\\tau,t+\\tau+d\\tau)` and let :math:`g(\\tau)` be the probability that no reaction occurs within :math:`[t,t+\\tau)`. The probability that a reaction occurs within the time interval :math:`d\\tau` is simply :math:`k_t d\\tau`. Thereby
         
@@ -1932,7 +1932,7 @@ class System(object):
         :math:`U` is uniformly distributed in 0,1, so is :math:`1-U`. Thereby, we can draw the time point of the next reaction from:
             
         .. math::
-            \\tau = \\frac{1}{k_t} \ln\Big[\\frac{1}{U}\Big],
+            \\tau = \\frac{1}{k_t} \\ln\\Big[\\frac{1}{U}\\Big],
         
         With the above method, we accurately sample from the distribution of expected molecule lifetimes :math:`\\rho(\\tau) = k_t e^{-k_t \\tau}`.
         
@@ -2102,9 +2102,9 @@ class System(object):
             
         .. math::
             
-            1-exp(\lambda \cdot \Delta t),
+            1-exp(\\lambda \\cdot \\Delta t),
         
-        where :math:`\lambda` is the reaction rate and :math:`\Delta t` is the integration time step.
+        where :math:`\\lambda` is the reaction rate and :math:`\\Delta t` is the integration time step.
         
         
         """
@@ -2507,4 +2507,3 @@ class System(object):
         # print('Particle enzymatic reaction added ('+type1+'+'+type2+'->'+type3+'+'+type2+')')           
 
         
-

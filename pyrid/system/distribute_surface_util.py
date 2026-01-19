@@ -249,7 +249,7 @@ def release_molecules_boundary_2d(System, RBs, Particles):
         
         P(d\\tilde{x}) = 1-e^{-d\\tilde{x}^2}+\\sqrt{\\pi}*dx*\\text{erfc}(d\\tilde{x})
         
-    The distance vector normal to the plane after the crossing can then be calculated from the diffusion length constant :math:`\\lambda` and the edges's normal vector :math:`\\hat{\\boldsymbol{n}}` by :math:`d\\boldsymbol{x} = \\lambda \\, d\\tilde{x} \\, \\hat{\\boldsymbol{n}} = \sqrt{4Dt} \\, d\\tilde{x} \\, \\hat{\\boldsymbol{n}}`.
+    The distance vector normal to the plane after the crossing can then be calculated from the diffusion length constant :math:`\\lambda` and the edges's normal vector :math:`\\hat{\\boldsymbol{n}}` by :math:`d\\boldsymbol{x} = \\lambda \\, d\\tilde{x} \\, \\hat{\\boldsymbol{n}} = \\sqrt{4Dt} \\, d\\tilde{x} \\, \\hat{\\boldsymbol{n}}`.
     
     Now that the number of molecules and their distance away from the plane are determined, the molecules are distributed in the simualtion box. Since the diffusion along each dimension is independent we can simply pick a random point uniformly distributed on the respective edge:
     
@@ -970,4 +970,3 @@ def poisson_disc_sampling_2D(Compartment, radii, mol_type_ids, weights, N, Syste
     return points, points_type, face_ids_psd, quaternion, count
                 
                 
-

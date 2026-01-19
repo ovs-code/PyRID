@@ -474,7 +474,7 @@ class Evaluation(object):
             plt.ylim(limits[1][0], limits[1][1])
             
         plt.xlabel('time in {}'.format(Simulation.System.time_unit))
-        plt.ylabel(r'$\langle P_{\hat{u}}(t) \rangle$')
+        plt.ylabel(r'$\\langle P_{\\hat{u}}(t) \rangle$')
         plt.yscale('log',base=10) 
         
         if save_fig == True:

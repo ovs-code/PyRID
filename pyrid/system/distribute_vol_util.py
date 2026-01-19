@@ -53,9 +53,9 @@ def release_molecules_boundary(System, RBs, Particles):
         
         P(d\\tilde{x}) = 1-e^{-d\\tilde{x}^2}+\\sqrt{\\pi}*dx*\\text{erfc}(d\\tilde{x})
         
-    The distance vector normal to the plane after the crossing can then be calculated from the diffusion length constant :math:`\\lambda` and the plane's normal vector :math:`\\hat{\\boldsymbol{n}}` by :math:`d\\boldsymbol{x} = \\lambda \\, d\\tilde{x} \\, \\hat{\\boldsymbol{n}} = \sqrt{4Dt} \\, d\\tilde{x} \\, \\hat{\\boldsymbol{n}}`.
+    The distance vector normal to the plane after the crossing can then be calculated from the diffusion length constant :math:`\\lambda` and the plane's normal vector :math:`\\hat{\\boldsymbol{n}}` by :math:`d\\boldsymbol{x} = \\lambda \\, d\\tilde{x} \\, \\hat{\\boldsymbol{n}} = \\sqrt{4Dt} \\, d\\tilde{x} \\, \\hat{\\boldsymbol{n}}`.
     
-    In the case that a molecule enters the simulation box near to another boundary, e.g. of a mesh compartment, we may also want to account for the distance traveled parallel to the plane in order to correctly resolve collision with the mesh. However, currently PyRID does not account for this. For small intregration time steps and meshes that are further than :math:`\sqrt{4Dt}` away from the simulation box border, the error introduced should however be negligable.
+    In the case that a molecule enters the simulation box near to another boundary, e.g. of a mesh compartment, we may also want to account for the distance traveled parallel to the plane in order to correctly resolve collision with the mesh. However, currently PyRID does not account for this. For small intregration time steps and meshes that are further than :math:`\\sqrt{4Dt}` away from the simulation box border, the error introduced should however be negligable.
     
     Now that the number of molecules and their distance away from the plane are determined, the molecules are distributed in the simualtion box. Since the diffusion along each dimension is independent we can simply pick a random point uniformly distributed on the respective plane. For triangulated mesh surfaces, triangles are picked randomly, weighted by their area. Sampling a uniformly distributed random point in a triangle is done by :cite:p:`Osada2002`
     
@@ -538,7 +538,7 @@ def random_direction_Halfsphere(sphere_radius, normal):
     -----
     First a uniformly distributed random vector :math:`d\\boldsymbol{X}` that sites somewhere within the full sphere is drawn.
     Next, we test whether the vector points into the same direction as the plane normal vector :math:`\\hat{\\boldsymbol{n}}` via their dot product.
-    If the dot product is negative, the direction vector is reflected at the plane by :math:`d\\boldsymbol{X}_{refl} = d\\boldsymbol{X} -2 d\\boldsymbol{X} \cdot \\hat{\\boldsymbol{n}}`.
+    If the dot product is negative, the direction vector is reflected at the plane by :math:`d\\boldsymbol{X}_{refl} = d\\boldsymbol{X} -2 d\\boldsymbol{X} \\cdot \\hat{\\boldsymbol{n}}`.
     
     Returns
     -------
@@ -1483,6 +1483,3 @@ def poisson_disc_sampling_uniform(Compartment, radii, mol_type_ids, weights, N, 
     # print('max_Trials: ', max_Trials)
     
     return points, points_type, quaternion, count
-
-
-

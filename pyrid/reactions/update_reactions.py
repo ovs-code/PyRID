@@ -394,7 +394,7 @@ def update_reactions(System, Particles, RBs):
     .. math::
         :label: ReactionProb
         
-        p = 1-exp\\Big(-\\sum_{i \\in paths} \\lambda_i \cdot \Delta t \\Big)
+        p = 1-exp\\Big(-\\sum_{i \\in paths} \\lambda_i \\cdot \\Delta t \\Big)
     
     *Doi bimolecular reaction scheme*
     

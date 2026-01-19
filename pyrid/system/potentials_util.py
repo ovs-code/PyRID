@@ -104,8 +104,8 @@ def piecewise_harmonic(r, args):
        = 
         \\begin{cases}
             \\frac{1}{2}k(r-(d_1+d_2))^2-h,& \\text{if } r<(d_1+d_2), \\\\
-            \\frac{h}{2}(\\frac{r_c-(d_1+d_2)}{2})^{-2}(r-(d_1+d_2))^2-h,& \\text{if } d \le r < d + \\frac{r_c-(d_1+d_2)}{2}, \\\\
-            -\\frac{h}{2}(\\frac{r_c-(d_1+d_2)}{2})^{-2}(r-r_c)^2,& \\text{if } d + \\frac{r_c-(d_1+d_2)}{2} \le r < r_c, \\\\
+            \\frac{h}{2}(\\frac{r_c-(d_1+d_2)}{2})^{-2}(r-(d_1+d_2))^2-h,& \\text{if } d \\le r < d + \\frac{r_c-(d_1+d_2)}{2}, \\\\
+            -\\frac{h}{2}(\\frac{r_c-(d_1+d_2)}{2})^{-2}(r-r_c)^2,& \\text{if } d + \\frac{r_c-(d_1+d_2)}{2} \\le r < r_c, \\\\
             0,              & \\text{otherwise}
         \\end{cases}
     
@@ -299,7 +299,7 @@ def CSW(r, args):
     
     .. math::
     
-       U_{CSW}(r) = - \\frac{\epsilon_{CSW}}{2} \Big[1 - \\tanh\Big(\\frac{r-r_w}{\\alpha}\Big)\Big]
+       U_{CSW}(r) = - \\frac{\\epsilon_{CSW}}{2} \\Big[1 - \\tanh\\Big(\\frac{r-r_w}{\\alpha}\\Big)\\Big]
     
     Returns
     -------
@@ -346,11 +346,11 @@ def PHS(r, args):
        =
        \\Biggl \\lbrace 
        { 
-       \lambda_r (\\frac{\lambda_r}{\lambda_a})^{\lambda_a} \epsilon_R [(\\frac{\sigma}{r})^{\lambda_r}-(\\frac{\sigma}{r})^{\lambda_a}]+\epsilon_R,\\text{ if } 
-          { r < (\\frac{\lambda_r}{\lambda_a}) \sigma }
+       \\lambda_r (\\frac{\\lambda_r}{\\lambda_a})^{\\lambda_a} \\epsilon_R [(\\frac{\\sigma}{r})^{\\lambda_r}-(\\frac{\\sigma}{r})^{\\lambda_a}]+\\epsilon_R,\\text{ if } 
+          { r < (\\frac{\\lambda_r}{\\lambda_a}) \\sigma }
        \\atop 
        0, \\text{ if } 
-          { r < (\\frac{\lambda_r}{\lambda_a}) \sigma }
+          { r < (\\frac{\\lambda_r}{\\lambda_a}) \\sigma }
        }
     
     Returns

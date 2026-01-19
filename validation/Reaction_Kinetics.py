@@ -210,9 +210,9 @@ for molecule in ['A', 'C', 'D']:
 plt.xlabel('Time in {}'.format(Simulation.System.time_unit))
 plt.ylabel('N')
 
-plt.text(0.40,0.9,'$k_{{AB \\rightarrow C}} = {0:.3g} \, M^{{-1}} ns^{{-1}}$'.format(k_macro_C), transform=fig.axes[0].transAxes, font=fontLgd)
-plt.text(0.40,0.8,'$k_{{AB \\rightarrow D}} = {0:.3g} \, M^{{-1}} ns^{{-1}}$'.format(k_macro_D), transform=fig.axes[0].transAxes, font=fontLgd)
-plt.text(0.40,0.70,'$k_{{-1}} = {0:.3g} \, ns^{{-1}}$'.format(5e-5), transform=fig.axes[0].transAxes, font=fontLgd)
+plt.text(0.40,0.9,'$k_{{AB \\rightarrow C}} = {0:.3g} \\, M^{{-1}} ns^{{-1}}$'.format(k_macro_C), transform=fig.axes[0].transAxes, font=fontLgd)
+plt.text(0.40,0.8,'$k_{{AB \\rightarrow D}} = {0:.3g} \\, M^{{-1}} ns^{{-1}}$'.format(k_macro_D), transform=fig.axes[0].transAxes, font=fontLgd)
+plt.text(0.40,0.70,'$k_{{-1}} = {0:.3g} \\, ns^{{-1}}$'.format(5e-5), transform=fig.axes[0].transAxes, font=fontLgd)
 
 lgd = plt.legend(bbox_to_anchor=(0,1.02,1,0.2), loc="lower left", mode="expand", borderaxespad=0, ncol=4, prop=fontLgd)
 

@@ -157,10 +157,10 @@ class RBs(HolesArray):
         
         Notes
         -----
-        For unimolecular reactions we can draw the time point of the next reaction from a distribution using a variant of the Gillespie Stochastic Simulation Algorithm (SSA) :cite:t:`Stiles2001`, :cite:t:`Erban2007`. For a single molecule having :math:`n` possible transition reactions/reaction paths each having a reaction rate :math:`k_i`, let :math:`k_t = \sum_i^n k_i` be the total reaction rate. Then, we can draw the time point of the next reaction from:
+        For unimolecular reactions we can draw the time point of the next reaction from a distribution using a variant of the Gillespie Stochastic Simulation Algorithm (SSA) :cite:t:`Stiles2001`, :cite:t:`Erban2007`. For a single molecule having :math:`n` possible transition reactions/reaction paths each having a reaction rate :math:`k_i`, let :math:`k_t = \\sum_i^n k_i` be the total reaction rate. Then, we can draw the time point of the next reaction from:
             
         .. math::
-            \\tau = \\frac{1}{k_t} \ln\Big[\\frac{1}{r}\Big],
+            \\tau = \\frac{1}{k_t} \\ln\\Big[\\frac{1}{r}\\Big],
             
         where :math:`r` is a random number uninformly distributed in (0,1).
         
@@ -434,7 +434,7 @@ class RBs(HolesArray):
         
         Notes
         -----
-        When propagating the cartesian coordinates of the rigid bead moelcule's center of diffusion we need to account for the orientation of the moelcule. This is readily done by applying the rotation matrix A to the molecule's mobility tensor (Note: to rotate a tensor we need to apply the rotation matrix twice: :math:`\\mu^{lab} = A \cdot \\mu^{local} \cdot A^{-1}`). However, things are more complicated when deriving the propagator for the rotation quaternion. Here, the rotation matrix is partially replaced by matrix :math:`\\boldsymbol{B}` which accounts for the fact that we are using a four dimensional coordinate set of quaternions instead of three euler angles. In other terms, :math:`\\boldsymbol{B}` relates the angular velocity in the local frame to the quaternion velocity ( :math:`\\frac{d\\boldsymbol{q}}{dt} = \\boldsymbol{B} \\boldsymbol{\\omega}^{local}` ) :cite:p:`Ilie2015`.
+        When propagating the cartesian coordinates of the rigid bead moelcule's center of diffusion we need to account for the orientation of the moelcule. This is readily done by applying the rotation matrix A to the molecule's mobility tensor (Note: to rotate a tensor we need to apply the rotation matrix twice: :math:`\\mu^{lab} = A \\cdot \\mu^{local} \\cdot A^{-1}`). However, things are more complicated when deriving the propagator for the rotation quaternion. Here, the rotation matrix is partially replaced by matrix :math:`\\boldsymbol{B}` which accounts for the fact that we are using a four dimensional coordinate set of quaternions instead of three euler angles. In other terms, :math:`\\boldsymbol{B}` relates the angular velocity in the local frame to the quaternion velocity ( :math:`\\frac{d\\boldsymbol{q}}{dt} = \\boldsymbol{B} \\boldsymbol{\\omega}^{local}` ) :cite:p:`Ilie2015`.
         The matrix :math:`\\boldsymbol{B}` is given by:
             
         .. math::
@@ -586,7 +586,7 @@ class RBs(HolesArray):
             & + B_{a \\alpha}(\\sqrt{\\boldsymbol{\\mu}^{rb}})_{\\alpha \\beta} \\Theta_{\\beta}^q \\sqrt{2 k_B T \\Delta t} + \\lambda_q q_a,
             \\end{align*}
         
-        where :math:`\\boldsymbol{A}` is the rotation matrix and :math:`\\boldsymbol{\mu}^{rb}` the rotational mobility tensor of the molecule in the body fixed frame (as opposed to the lab frame of reference). :math:`\\boldsymbol{\\Theta}^q` is a normal distributed random vector describing the random rotational movement of the molecule due to collisions with the fluid molecules. :math:`\\boldsymbol{\mu}^{rb}` should be a real, positive semidefinite matrix to have proper physical meaning :cite:p:`Niethammer2006`. In this case, there exists a unique square root of the matrix :math:`\\sqrt{\\boldsymbol{\\mu}^{rb}}`, which can be found via diagonalization (see geometry_util.Transform:Util.sqrtM()). Latin indices run from 0 to 3 and Greek indices run from 1 to 3.
+        where :math:`\\boldsymbol{A}` is the rotation matrix and :math:`\\boldsymbol{\\mu}^{rb}` the rotational mobility tensor of the molecule in the body fixed frame (as opposed to the lab frame of reference). :math:`\\boldsymbol{\\Theta}^q` is a normal distributed random vector describing the random rotational movement of the molecule due to collisions with the fluid molecules. :math:`\\boldsymbol{\\mu}^{rb}` should be a real, positive semidefinite matrix to have proper physical meaning :cite:p:`Niethammer2006`. In this case, there exists a unique square root of the matrix :math:`\\sqrt{\\boldsymbol{\\mu}^{rb}}`, which can be found via diagonalization (see geometry_util.Transform:Util.sqrtM()). Latin indices run from 0 to 3 and Greek indices run from 1 to 3.
         
         The matrix :math:`\\boldsymbol{B}` is given by:
             
@@ -602,12 +602,12 @@ class RBs(HolesArray):
             q_3 & -q_2 & q_1 & q_0 \\\\
             \\end{pmatrix}.         
             
-        For infinitesimal time steps :math:`\\boldsymbol{q}` preserves its unit length. However, for finite time step :math:`\\Delta t` an additional constraint needs to be added to ensure that :math:`\\boldsymbol{q}` keeps its unit length. This is realized here by a constraint force in the last term, directed along :math:`\\boldsymbol{q}`. By solving the Langrange multiplier :math:`\lambda_q` from the condition :math:`q(t+\Delta t) = 1` we get the strength of the force. Denoting :math:`\\tilde{q}(t+ \\Delta t)` as the uncopnstrained quaternion, :math:`\lambda_q` is obtained from solving the quadratic equation
+        For infinitesimal time steps :math:`\\boldsymbol{q}` preserves its unit length. However, for finite time step :math:`\\Delta t` an additional constraint needs to be added to ensure that :math:`\\boldsymbol{q}` keeps its unit length. This is realized here by a constraint force in the last term, directed along :math:`\\boldsymbol{q}`. By solving the Langrange multiplier :math:`\\lambda_q` from the condition :math:`q(t+\\Delta t) = 1` we get the strength of the force. Denoting :math:`\\tilde{q}(t+ \\Delta t)` as the uncopnstrained quaternion, :math:`\\lambda_q` is obtained from solving the quadratic equation
         
         .. math::
             :label: LagrangeMult
             
-            \\lambda_q^2 + 2 \\lambda_q \\boldsymbol{q} \cdot \\tilde{q}(t+ \\Delta t)+ \\tilde{q}^2(t+ \\Delta t) = 1
+            \\lambda_q^2 + 2 \\lambda_q \\boldsymbol{q} \\cdot \\tilde{q}(t+ \\Delta t)+ \\tilde{q}^2(t+ \\Delta t) = 1
             
         Simple rescaling of the quaternion will change the sampled phase space distribution. However, in practice, the resulting error is marginal and since rescaling is fatser than solving the quadratic equation each time step, we currently do the rescaling. However, the more accurate method is mentioned here for compeleness.
         
@@ -688,7 +688,7 @@ class RBs(HolesArray):
             & + A_{\\alpha \\gamma}(\\sqrt{\\boldsymbol{\\mu}^{tb}})_{\\gamma \\beta} \\Theta_{\\beta}^t \\sqrt{2 k_B T \\Delta t},
             \\end{align*}
             
-        where :math:`\\boldsymbol{A}` is the rotation matrix and :math:`\\boldsymbol{\mu}^{tb}` the translational mobility tensor of the molecule in the body fixed frame (as opposed to the lab frame of reference). :math:`\\boldsymbol{\\Theta}^t` is a normal distributed random vector describing the random movement of the molecule due to collisions with the fluid molecules. :math:`\\boldsymbol{\mu}^{tb}` should be a real, positive semidefinite matrix to have proper physical meaning :cite:p:`Niethammer2006` . In this case, there exists a unique square root of the matrix :math:`\\sqrt{\\boldsymbol{\\mu}^{tb}}`, which can be found via diagonalization (see geometry_util.Transform:Util.sqrtM()). Latin indices run from 0 to 3 and Greek indices run from 1 to 3.
+        where :math:`\\boldsymbol{A}` is the rotation matrix and :math:`\\boldsymbol{\\mu}^{tb}` the translational mobility tensor of the molecule in the body fixed frame (as opposed to the lab frame of reference). :math:`\\boldsymbol{\\Theta}^t` is a normal distributed random vector describing the random movement of the molecule due to collisions with the fluid molecules. :math:`\\boldsymbol{\\mu}^{tb}` should be a real, positive semidefinite matrix to have proper physical meaning :cite:p:`Niethammer2006` . In this case, there exists a unique square root of the matrix :math:`\\sqrt{\\boldsymbol{\\mu}^{tb}}`, which can be found via diagonalization (see geometry_util.Transform:Util.sqrtM()). Latin indices run from 0 to 3 and Greek indices run from 1 to 3.
         
         """
         

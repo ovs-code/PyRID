@@ -111,7 +111,7 @@ def update_pressure(Simulation):
     .. math::
         :label: Pressure
         
-        P_{mol} = P_{mol}^{kin} + \\frac{1}{6 V} \\sum_{i=1}^{N} \\sum_{j \\neq}^{N} \\langle \\boldsymbol{F}_{ij} \cdot (\\boldsymbol{R}_i - \\boldsymbol{R}_j) \\rangle,
+        P_{mol} = P_{mol}^{kin} + \\frac{1}{6 V} \\sum_{i=1}^{N} \\sum_{j \\neq}^{N} \\langle \\boldsymbol{F}_{ij} \\cdot (\\boldsymbol{R}_i - \\boldsymbol{R}_j) \\rangle,
         
     where :math:`V` is the total volume of the simulation box, :math:`\\boldsymbol{F}_{ij}` is the force on particle i exerted by particle j and :math:`\\boldsymbol{R}_{i}, \\boldsymbol{R}_{j}` are the center of mass of the rigid body molecules, not the center of particles i and j! In Brownian dynamics simulations, :math:`P_{mol}^{kin} = N_{mol} k_B T`, where :math:`N_{mol}` is the number of molecules. Also, the origin of molecules is represented by the center of diffusion around which the molecule rotates about, which is not the center of mass :cite:p:`Harvey1980`! The net frictional force and troque act thorugh the center of diffusion. This is because when doing Brownian dynamics (and equaly for Langevin dynamics), we do account for the surrounding fluid. Different parts of the molecule will therefore interact with each other via hydrodynamic interactions/coupling. As a result, the center of the molecule (around which the molecule rotates in response to external forces) is not the same as the center of mass, which assumes no such interactions (the molecule sites in empry space). However, for symmetric molecules, the center of mass and the center of diffusion are the same!
     
@@ -306,19 +306,19 @@ class Simulation(object):
         
         self.Measures = ['Position', 'Energy', 'Pressure', 'Volume', 'Virial', 'Virial Tensor', 'Number', 'Orientation', 'Bonds', 'Reactions', 'Force', 'Torque', 'RDF']
         
-        self.length_units = {'micrometer':'\mu m', 'nanometer':'nm'}
+        self.length_units = {'micrometer':'\\mu m', 'nanometer':'nm'}
         
         self.units = dict()
         self.units['Time'] = self.System.time_unit
         self.units['Length'] = self.length_units[self.System.length_unit]
         self.units['Position'] = self.length_units[self.System.length_unit]
-        self.units['Energy'] = r'$\frac{kJ}{mol}$'
+        self.units['Energy'] = r'$\\frac{kJ}{mol}$'
         self.units['Volume'] = r'${}^3$'.format(self.length_units[self.System.length_unit])
-        self.units['Force'] = r'$\frac{{kJ}}{{mol \cdot {}}}$'.format(self.length_units[self.System.length_unit])
-        self.units['Torque'] = r'$\frac{kJ}{mol}$'
-        self.units['Virial'] = r'$\frac{kJ}{mol}$'
-        self.units['Virial Tensor'] = r'$\frac{kJ}{mol}$'
-        self.units['Pressure'] = r'$\frac{{kJ}}{{mol \cdot {}^3}}$'.format(self.length_units[self.System.length_unit])
+        self.units['Force'] = r'$\\frac{{kJ}}{{mol \\cdot {}}}$'.format(self.length_units[self.System.length_unit])
+        self.units['Torque'] = r'$\\frac{kJ}{mol}$'
+        self.units['Virial'] = r'$\\frac{kJ}{mol}$'
+        self.units['Virial Tensor'] = r'$\\frac{kJ}{mol}$'
+        self.units['Pressure'] = r'$\\frac{{kJ}}{{mol \\cdot {}^3}}$'.format(self.length_units[self.System.length_unit])
         self.units['Reactions'] = r'#'
         self.units['Bonds'] = r'#'
         self.units['Number'] = r'#'
@@ -628,7 +628,7 @@ class Simulation(object):
         next uni-particle reaction occuring is calculated in advance and executed when the simualtion reaches the respective time point. 
         For unimolecular reactions we can draw the time point of the next reaction from a distribution using a variant of the Gillespie Stochastic 
         Simulation Algorithm (SSA) :cite:t:`Stiles2001`, :cite:t:`Erban2007`. For a single molecule having :math:`n` possible transition reactions/reaction paths each 
-        having a reaction rate :math:`k_i`, let :math:`k_t = \sum_i^n k_i` be the total reaction rate. 
+        having a reaction rate :math:`k_i`, let :math:`k_t = \\sum_i^n k_i` be the total reaction rate. 
         
         Now, let :math:`\\rho(\\tau) d\\tau` be the probability that the next reaction occurs within :math:`[t+\\tau,t+\\tau+d\\tau)` and let :math:`g(\\tau)` 
         be the probability that no reaction occurs within :math:`[t,t+\\tau)`. The probability that a reaction occurs within the time interval :math:`d\\tau` 
@@ -651,7 +651,7 @@ class Simulation(object):
         :math:`U` is uniformly distributed in 0,1, so is :math:`1-U`. Thereby, we can draw the time point of the next reaction from:
             
         .. math::
-            \\tau = \\frac{1}{k_t} \ln\Big[\\frac{1}{U}\Big],
+            \\tau = \\frac{1}{k_t} \\ln\\Big[\\frac{1}{U}\\Big],
         
         With the above method, we accurately sample from the distribution of expected molecule lifetimes :math:`\\rho(\\tau) = k_t e^{-k_t \\tau}`.
         
@@ -759,9 +759,9 @@ class Simulation(object):
             
         .. math::
             
-            1-exp(\lambda \cdot \Delta t),
+            1-exp(\\lambda \\cdot \\Delta t),
         
-        where :math:`\lambda` is the reaction rate and :math:`\Delta t` is the integration time step.
+        where :math:`\\lambda` is the reaction rate and :math:`\\Delta t` is the integration time step.
         
         
         """
@@ -921,7 +921,7 @@ class Simulation(object):
         fixed_concentration_at_boundary() calculates some properties that are necessary to properly distribute molecules inside the simulation box that hit 
         the simulation box boundary from the outside (Thereby, 'virtual molecules' become `real` molecules in our simualtion). The number of hits per time step 
         a boundary of area A experiences is :math:`N = l_{perp}*A*C`. Where :math:`C` is the concentration in molecules per volume and :math:`l_{perp}` is the 
-        average net displacement in one tiem step towards or away from any plane, where :math:`l_{perp} = \sqrt{(4*D*\Delta t/\pi)}` :cite:t:`Stiles2001`.
+        average net displacement in one tiem step towards or away from any plane, where :math:`l_{perp} = \\sqrt{(4*D*\\Delta t/\\pi)}` :cite:t:`Stiles2001`.
         
         
         """

@@ -1409,10 +1409,10 @@ def plot_cell_grid(Simulation, save_fig = False, fig_name = None, fig_path = Non
     ax.tick_params(axis='x', pad=6)
     ax.tick_params(axis='y', pad=-7)
     ax.tick_params(axis='z', pad=5)
-    ax.set_xlabel(r'x in $\mu m$',labelpad=14)
-    ax.set_ylabel(r'y in $\mu m$',labelpad=0)
+    ax.set_xlabel(r'x in $\\mu m$',labelpad=14)
+    ax.set_ylabel(r'y in $\\mu m$',labelpad=0)
     plt.yticks(rotation=45)
-    ax.set_zlabel(r'z in $\mu m$',labelpad=7)
+    ax.set_zlabel(r'z in $\\mu m$',labelpad=7)
 
     if show:
         plt.show()
@@ -1606,8 +1606,8 @@ def plot_mobility_matrix(molecule, Simulation, save_fig = False, fig_name = None
 
     my_molecule = Simulation.System.molecule_types[molecule]
 
-    # Titles = [r'$D_{tt} \, (\mu m^2/s)$', '$D_{rr} \, (rad/s)$', '$D_{tr}  \, (\mu m/s)$', '$D_{rt} \, (\mu m/s)$']
-    Titles = [r'$D_{tt} \, $'+'$({0}^2/{1})$'.format(Simulation.units['Length'], Simulation.System.time_unit), '$D_{rr} \,$'+'$(rad^2/{})$'.format(Simulation.System.time_unit), '$D_{tr}  \, $'+'$({0}/{1})$'.format(Simulation.System.length_unit, Simulation.System.time_unit), '$D_{rt} \,  $'+'$({0}/{1})$'.format(Simulation.System.length_unit, Simulation.System.time_unit)]
+    # Titles = [r'$D_{tt} \\, (\\mu m^2/s)$', '$D_{rr} \\, (rad/s)$', '$D_{tr}  \\, (\\mu m/s)$', '$D_{rt} \\, (\\mu m/s)$']
+    Titles = [r'$D_{tt} \\, $'+'$({0}^2/{1})$'.format(Simulation.units['Length'], Simulation.System.time_unit), '$D_{rr} \\,$'+'$(rad^2/{})$'.format(Simulation.System.time_unit), '$D_{tr}  \\, $'+'$({0}/{1})$'.format(Simulation.System.length_unit, Simulation.System.time_unit), '$D_{rt} \\,  $'+'$({0}/{1})$'.format(Simulation.System.length_unit, Simulation.System.time_unit)]
 
     Data = [my_molecule.mu_tb*(Simulation.System.kbt), my_molecule.mu_rb*(Simulation.System.kbt)]
 
@@ -1873,8 +1873,8 @@ def plot_concentration_profile(Simulation, axis = 0, save_fig = False, fig_name 
     for mol_type in Simulation.System.molecule_types:
         plt.plot(np.linspace(0,box_lengths[axis],cells_axis),Histograms[mol_type], label = '{}'.format(mol_type))
     plt.legend()
-    plt.xlabel(axis_name[axis]+' in $\mu m$')
-    plt.ylabel('Packing fraction $\Phi$')
+    plt.xlabel(axis_name[axis]+' in $\\mu m$')
+    plt.ylabel('Packing fraction $\\Phi$')
     plt.ylim(0)
 
 
