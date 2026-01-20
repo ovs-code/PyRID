@@ -1409,10 +1409,10 @@ def plot_cell_grid(Simulation, save_fig = False, fig_name = None, fig_path = Non
     ax.tick_params(axis='x', pad=6)
     ax.tick_params(axis='y', pad=-7)
     ax.tick_params(axis='z', pad=5)
-    ax.set_xlabel(r'x in $\\mu m$',labelpad=14)
-    ax.set_ylabel(r'y in $\\mu m$',labelpad=0)
+    ax.set_xlabel(r'x in $\mu m$',labelpad=14)
+    ax.set_ylabel(r'y in $\mu m$',labelpad=0)
     plt.yticks(rotation=45)
-    ax.set_zlabel(r'z in $\\mu m$',labelpad=7)
+    ax.set_zlabel(r'z in $\mu m$',labelpad=7)
 
     if show:
         plt.show()
@@ -1607,7 +1607,7 @@ def plot_mobility_matrix(molecule, Simulation, save_fig = False, fig_name = None
     my_molecule = Simulation.System.molecule_types[molecule]
 
     # Titles = [r'$D_{tt} \\, (\\mu m^2/s)$', '$D_{rr} \\, (rad/s)$', '$D_{tr}  \\, (\\mu m/s)$', '$D_{rt} \\, (\\mu m/s)$']
-    Titles = [r'$D_{tt} \\, $'+'$({0}^2/{1})$'.format(Simulation.units['Length'], Simulation.System.time_unit), '$D_{rr} \\,$'+'$(rad^2/{})$'.format(Simulation.System.time_unit), '$D_{tr}  \\, $'+'$({0}/{1})$'.format(Simulation.System.length_unit, Simulation.System.time_unit), '$D_{rt} \\,  $'+'$({0}/{1})$'.format(Simulation.System.length_unit, Simulation.System.time_unit)]
+    Titles = ['$D_{tt} \\, $'+'$({0}^2/{1})$'.format(Simulation.units['Length'], Simulation.System.time_unit), '$D_{rr} \\,$'+'$(rad^2/{})$'.format(Simulation.System.time_unit), '$D_{tr}  \\, $'+'$({0}/{1})$'.format(Simulation.System.length_unit, Simulation.System.time_unit), '$D_{rt} \\,  $'+'$({0}/{1})$'.format(Simulation.System.length_unit, Simulation.System.time_unit)]
 
     Data = [my_molecule.mu_tb*(Simulation.System.kbt), my_molecule.mu_rb*(Simulation.System.kbt)]
 
@@ -1690,17 +1690,16 @@ def plot_mobility_matrix(molecule, Simulation, save_fig = False, fig_name = None
     left.locator_params(axis='y', nbins=3)
     left.locator_params(axis='z', nbins=3)
 
-    mid.set_title(Titles[0], pad=10)
 
     # divider = make_axes_locatable(mid)
     # cax = divider.append_axes('right', size='5%', pad=0.05)
     # im1 = mid.matshow(Data[0])
     sns.heatmap(Data[0], ax = mid, linewidths=.5, annot=True, annot_kws={"fontsize":8}, fmt='.3g', cbar_kws={"shrink": .7, "ticks": np.round([np.min(Data[0]), (np.max(Data[0])-np.min(Data[0]))/2, np.max(Data[0])*0.95],3)}, cmap = "YlOrBr")
+    mid.set_title(Titles[0], pad=10)
     # cb = fig.colorbar(im1, cax=cax, orientation='vertical')
     # cb.formatter.set_scientific(True)
     # cb.locator.axis.get_offset_text().set_x(5)
 
-    right.set_title(Titles[1], pad=10)
 
     # divider = make_axes_locatable(right)
     # cax = divider.append_axes('right', size='5%', pad=0.05)
@@ -1709,6 +1708,7 @@ def plot_mobility_matrix(molecule, Simulation, save_fig = False, fig_name = None
     # cb.formatter.set_scientific(True)
     # cb.locator.axis.get_offset_text().set_x(5)
     sns.heatmap(Data[1], ax = right, linewidths=.5, annot=True, annot_kws={"fontsize":8}, fmt=".2g", cbar_kws={"shrink": .7, "ticks": np.round([np.min(Data[1]), (np.max(Data[1])-np.min(Data[1]))/2, np.max(Data[1])*0.95],3)}, cmap = "YlOrBr")
+    right.set_title(Titles[1], pad=10)
 
     if show:
         plt.show()
