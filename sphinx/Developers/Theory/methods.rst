@@ -33,7 +33,7 @@ Rigid bead molecules
 --------------------
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.molecules.rigidbody_util.RBs`
     :func:`pyrid.molecules.particles_util.Particles`
 
@@ -98,7 +98,7 @@ Propagation of translational and angular motion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.molecules.rigidbody_util.RBs.update_B`
     :func:`pyrid.molecules.rigidbody_util.RBs.update_dX`
     :func:`pyrid.molecules.rigidbody_util.RBs.update_dq`
@@ -186,7 +186,7 @@ as :cite:p:`Ilie2015`
 
 .. math::
     :label: eq:dphidt
-    
+
     \boldsymbol{\phi}(t) = \boldsymbol{\phi}(t-\Delta t) + \boldsymbol{A} \boldsymbol{M}^{rr,b} \boldsymbol{A}^T \boldsymbol{T} \Delta t + \boldsymbol{A} \sqrt{2 \boldsymbol{M}^{rr,b} k_B T}\, \boldsymbol{W}^r(\Delta t).
 
 Here, :math:`\boldsymbol{W}(\Delta t)` is a 3-dimensional Wiener
@@ -214,7 +214,7 @@ Quaternion propagator
 ^^^^^^^^^^^^^^^^^^^^^
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.math.transform_util.rot_quaternion`
     :func:`pyrid.math.transform_util.quat_mult`
     :func:`pyrid.math.transform_util.quaternion_plane_to_plane`
@@ -240,7 +240,7 @@ quaternions by :cite:p:`Baraff2001` (:func:`pyrid.molecules.rigidbody_util.RBs.c
 .. math::
 
    \begin{split}\boldsymbol{A}
-       = 
+       =
        \begin{pmatrix}
            1-2(q_2^2+q_3^2) & 2(q_1 q_2-q_0 q_3) & 2(q_1 q_3+q_0 q_2) \\
            2(q_1 q_2+q_0 q_3) & 1-2(q_1^2+q_3^2) & 2(q_2 q_3-q_0 q_1) \\
@@ -333,7 +333,7 @@ Mobility tensor for rigid bead models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.molecules.hydro_util`
 
     :func:`pyrid.molecules.hydro_util.A`
@@ -378,13 +378,13 @@ supermatrix :cite:p:`Carrasco1999`:
     \boldsymbol{M}^{tt} & \boldsymbol{M}^{tr} \\
     \boldsymbol{M}^{rt} & \boldsymbol{M}^{rr} \\
     \end{pmatrix}
-    = 
+    =
     \frac{1}{k_B T}
     \begin{pmatrix}
     \boldsymbol{D}^{tt} & \boldsymbol{D}^{tr,T} \\
     \boldsymbol{D}^{rt} & \boldsymbol{D}^{rr} \\
     \end{pmatrix}
-    = 
+    =
     \begin{pmatrix}
     \boldsymbol{\Xi}^{tt} & \boldsymbol{\Xi}^{tr} \\
     \boldsymbol{\Xi}^{rt} & \boldsymbol{\Xi}^{rr} \\
@@ -526,7 +526,7 @@ Center of Diffusion
 ~~~~~~~~~~~~~~~~~~~
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.molecules.hydro_util.calc_CoD`
     :func:`pyrid.molecules.hydro_util.center_of_mass`
 
@@ -569,7 +569,7 @@ Compartments
 ------------
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.system.system_util.Compartment`
     :func:`pyrid.system.system_util.System.add_border_3d`
     :func:`pyrid.system.system_util.System.add_edges`
@@ -672,7 +672,7 @@ vector. The normal vector of the triangle plane is given by
 :math:`\boldsymbol{n} = (\boldsymbol{p}_1-\boldsymbol{p}_0)\times(\boldsymbol{p}_2-\boldsymbol{p}_0)`.
 In the following, I will write the three vertices of a triangle as
 :math:`\boldsymbol{p}_0, \boldsymbol{p}_1` and :math:`\boldsymbol{p}_2`
-and vertices are always sorted in counter clockwise order (:numref:`fig:gedodesic_StanfordBunny` B). 
+and vertices are always sorted in counter clockwise order (:numref:`fig:gedodesic_StanfordBunny` B).
 Thereby, the normal vector of a triangle points outside the mesh compartment. In PyRID, a compartment
 is defined by a triangulated manifold mesh, which is a mesh without
 holes and disconnected vertices or edges, i.e. it has no gaps and
@@ -775,17 +775,17 @@ details of the method sketched above.
    two array that hold for each triangle the vertex indices of the three
    triangle edges and the triangle indices of the three triangle
    neighbours are used. **(A)** Triangle vertices belonging to a
-   triangle are ordered counterclockwise, as are edges. Efficient algorithms 
-   based on barycentric triangle coordinates are used to check whether a point 
-   lies within a triangle or whether a displacement vector intersects a triangle edge. 
+   triangle are ordered counterclockwise, as are edges. Efficient algorithms
+   based on barycentric triangle coordinates are used to check whether a point
+   lies within a triangle or whether a displacement vector intersects a triangle edge.
    **(A)** Visualization of mesh surface ray marching. If a
    molecule (green sphere) crosses a triangle edge, its displacement
    vector is advanced to the corresponding edge and then rotated into
    the plane of the neighboring triangle. **D,E** By the ray marching
    method described in the text, molecules follow a geodesic paths on
    the mesh surface. **F** The mean squared displacement of diffusing
-   surface molecules is in agreement with theory. According to theory, 
-   in 2 dimensions :math:`MSD = 4Dt`. In this validation example, 
+   surface molecules is in agreement with theory. According to theory,
+   in 2 dimensions :math:`MSD = 4Dt`. In this validation example,
    :math:`D=43 nm^2/\mu s`.
 
 Surface ray marching
@@ -914,7 +914,7 @@ Boundary Conditions
 -------------------
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.system.system_util.System`
 
 PyRID supports three kinds of boundary conditions:
@@ -940,7 +940,7 @@ Fixed concentration boundary conditions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.system.system_util.System.add_border_3d`
     :func:`pyrid.system.system_util.System.fixed_concentration_at_boundary`
 
@@ -1038,7 +1038,7 @@ no molecular interactions are simulated.
    corresponding edges that intersect with the boundary (purple lines).
    If boundary conditions are set to "fixed concentration" transparent
    triangles and edges act as absorbing boundaries but in addition
-   release new molecules into the simulation volume. (Right) If mesh compartments 
+   release new molecules into the simulation volume. (Right) If mesh compartments
    intersect the boundary of the simulation box, the remaining part of the box
    boundary must also be represented by a triangulated mesh. **B** For periodic
    boundary conditions, PyRID follows the minimal image convention, i.e.
@@ -1051,7 +1051,7 @@ Reactions
 ---------
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.reactions.reactions_registry_util`
     :func:`pyrid.reactions.reactions_registry_util.Reaction`
 
@@ -1306,10 +1306,10 @@ then given by
 
 .. math:: p = 1-\exp\Big(-\sum_i^n k_i \Delta t \Big),
 
-where :math:`n` is the number of reaction paths and :math:`k_i` the microscopic reaction rate for each path. 
-Here, we distinguish between the microscopic reaction rate, 
-which is the rate at which two molecules react if their distance is below :math:`R_{react}` and the 
-macroscopic reaction rate, which is the rate at which any two molecules react on average. 
+where :math:`n` is the number of reaction paths and :math:`k_i` the microscopic reaction rate for each path.
+Here, we distinguish between the microscopic reaction rate,
+which is the rate at which two molecules react if their distance is below :math:`R_{react}` and the
+macroscopic reaction rate, which is the rate at which any two molecules react on average.
 The macroscopic reaction rate is what you usually get as a result out of some experimental measurement.
 We assume that the time step :math:`\Delta t` is so small that the molecules can only
 undergo one reaction within :math:`\Delta t`. As such, the accuracy of the simulation strongly
@@ -1395,7 +1395,7 @@ Potentials
 ----------
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.system.potentials_util`
 
 PyRID supports any pairwise, short ranged interaction potential and
@@ -1416,7 +1416,7 @@ Weak piecewise harmonic potential
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.system.potentials_util.piecewise_harmonic`
 
 The very same interaction potential is also used in ReaDDy
@@ -1426,7 +1426,7 @@ The very same interaction potential is also used in ReaDDy
     :label: eq:Weak piecewise harmonic
 
     \begin{split}U_{ha}(r)
-    = 
+    =
     \begin{cases}
         \frac{1}{2}k(r-(d_1+d_2))^2-h,& \text{if } r<(d_1+d_2), \\
         \frac{h}{2}(\frac{r_c-(d_1+d_2)}{2})^{-2}(r-(d_1+d_2))^2-h,& \text{if } d \le r < d + \frac{r_c-(d_1+d_2)}{2}, \\
@@ -1438,7 +1438,7 @@ Harmonic repulsion potential
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.system.potentials_util.harmonic_repulsion`
 
 The very same interaction potential is also used in ReaDDy
@@ -1449,11 +1449,11 @@ The very same interaction potential is also used in ReaDDy
 
     U(r)
     =
-    \Biggl \lbrace 
-    { 
-    \frac{\kappa}{2}(r-\sigma)^2,\text{ if } 
+    \Biggl \lbrace
+    {
+    \frac{\kappa}{2}(r-\sigma)^2,\text{ if }
         { r \leq \sigma }
-    \atop 
+    \atop
     0, \text{ otherwise },
     }
 
@@ -1461,7 +1461,7 @@ Continuous Square-Well (CSW) potential
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.system.potentials_util.CSW`
 
 The Continuous Square-Well (CSW) potential has been introduced in
@@ -1476,7 +1476,7 @@ Pseudo Hard Sphere (PHS) potential
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.system.potentials_util.PHS`
 
 The Pseudo Hard Sphere (PHS) potential has been introduced in
@@ -1487,12 +1487,12 @@ The Pseudo Hard Sphere (PHS) potential has been introduced in
 
     U_{HS}
     =
-    \Biggl \lbrace 
-    { 
-    \lambda_r (\frac{\lambda_r}{\lambda_a})^{\lambda_a} \epsilon_R [(\frac{\sigma}{r})^{\lambda_r}-(\frac{\sigma}{r})^{\lambda_a}]+\epsilon_R,\text{ if } 
+    \Biggl \lbrace
+    {
+    \lambda_r (\frac{\lambda_r}{\lambda_a})^{\lambda_a} \epsilon_R [(\frac{\sigma}{r})^{\lambda_r}-(\frac{\sigma}{r})^{\lambda_a}]+\epsilon_R,\text{ if }
         { r < (\frac{\lambda_r}{\lambda_a}) \sigma }
-    \atop 
-    0, \text{ if } 
+    \atop
+    0, \text{ if }
         { r < (\frac{\lambda_r}{\lambda_a}) \sigma },
     }
 
@@ -1500,7 +1500,7 @@ Observables
 -----------
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.observables.observables_util`
     :func:`pyrid.observables.observables_util.Observables`
 
@@ -1545,7 +1545,7 @@ Radial distribution function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.observables.observables_util.Observables.observe_rdf`
     :func:`pyrid.evaluation.rdf_util`
     :func:`pyrid.evaluation.rdf_util.radial_distr_function`
@@ -1563,7 +1563,7 @@ Pressure
 ~~~~~~~~
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.run.update_pressure`
 
 The pressure can be calculated from the virial or the the viral tensor.
@@ -1574,7 +1574,7 @@ pressure. Instead, one needs to calculate the molecular virial
 :cite:p:`Glaser2020`, by taking the pairwise distance between
 the center of diffusion of the respective molecule pairs:
 
-.. math:: P_{mol} = P_{mol}^{kin} + \frac{1}{6 V} \sum_{i=1}^{N} \sum_{j \neq}^{N} \langle \boldsymbol{F}_{ij} \cdot (\boldsymbol{R}_i - \boldsymbol{R}_j) \rangle,
+.. math:: P_{mol} = P_{mol}^{kin} + \frac{1}{6 V} \sum_{i=1}^{N} \sum_{j \neq i}^{N} \langle \boldsymbol{F}_{ij} \cdot (\boldsymbol{R}_i - \boldsymbol{R}_j) \rangle,
 
 where :math:`V` is the total volume of the simulation box,
 :math:`\boldsymbol{F}_{ij}` is the force on particle i exerted by
@@ -1599,7 +1599,7 @@ Berendsen barostat
 ------------------
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.system.system_util.System.add_barostat_berendsen`
 
 It is sometimes desirable to be able to do simulations in the NPT
@@ -1629,7 +1629,7 @@ Distribution of molecules
 -------------------------
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.system.distribute_vol_util`
     :func:`pyrid.system.distribute_surface_util`
 
@@ -1637,7 +1637,7 @@ Volume molecules
 ~~~~~~~~~~~~~~~~
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.system.distribute_vol_util`
     :func:`pyrid.system.distribute_vol_util.monte_carlo_distribution_3D`
     :func:`pyrid.system.distribute_vol_util.normal`
@@ -1687,7 +1687,7 @@ Surface molecules
 ~~~~~~~~~~~~~~~~~
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.system.distribute_surface_util`
     :func:`pyrid.system.distribute_surface_util.monte_carlo_distribution_2D`
     :func:`pyrid.system.distribute_surface_util.normal`
@@ -1766,7 +1766,7 @@ Dynamic arrays in PyRID
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.data_structures.dynamic_array_util`
 
 In PyRID, molecules and particles constantly enter or leave the system
@@ -1783,7 +1783,7 @@ The tightly packed dynamic array (dense array)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.data_structures.dynamic_array_util.DenseArray`
 
 A tightly packed dynamic array is a dynamic array (similar to lists in
@@ -1817,7 +1817,7 @@ The dynamic array with holes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.data_structures.dynamic_array_util.HolesArray`
 
 To store molecules and particles, we use a dynamic array with holes
@@ -1871,7 +1871,7 @@ Dynamic arrays used for reaction handling
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.data_structures.dynamic_array_util.HolesArrayReact`
     :func:`pyrid.data_structures.dynamic_array_util.DenseArrayReact`
     :func:`pyrid.reactions.reactions_registry_util.Reaction`
@@ -1938,7 +1938,7 @@ Polydispersity
 --------------
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.data_structures.h_grid_util`
     :func:`pyrid.system.update_force.update_force_append_reactions`
 
@@ -2086,7 +2086,7 @@ Visualization
 -------------
 
 .. dropdown:: Implementation
-    
+
     :func:`pyrid.evaluation.evaluation_util.Evaluation`
 
 For visualization, I have developed a blender addon for PyRID. In

@@ -27,7 +27,7 @@ If, e.g., the resolution of the hierarchical grid is changed, the order in which
 to make sure reactions are sorted by the educt tuples.
 Also, if you make any changes to the particles or rigid body data structure you may also want to sort particles by their id whenever looping over particle or molecules.
 
-**Theroy**
+**Theory**
 
 In the Theory section, I will introduce and discuss the main methods used in PyRID. I start by introducing the scheme by which bead molecules are represented. Followed by the derivation of an algorithm for the propagation of translational and predominantly rotational diffusion. The rotational and translational mobility tensors dictate the translational and rotational motion of anisotopic rigid bodies. Therefore, I outline the calculation of the mobility tensors based on a modified Oseen tensor :cite:p:`Carrasco1999`. One of the main features of PyRID that distinguishes it from other molecular dynamics tools such as LAMMPS, Gromacs and HooMD is the ability to simulate arbitrary unimolecular and bimolecular reactions using a special stochastic simulation algorithm. I describe how these reactions are evaluated in PyRID. Another notable feature of PyRID is its ability to restrict the motion of molecules to complex compartment geometries represented by triangulated meshes. A brief overview of how compartment collisions and surface diffusion are handled is given.
 
